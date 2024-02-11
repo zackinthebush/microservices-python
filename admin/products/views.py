@@ -40,6 +40,13 @@ class ProductViewSet(viewsets.ViewSet):
         publish('product_deleted', pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def like(self, request, pk=None):
+        product = Product.objects.get(id=pk)
+        product.likes += 1
+        product.save()
+        publish('product_liked', pk)
+        return Response({'likes': product.likes}, status=status.HTTP_200_OK)
+
 
 class UserAPIView(APIView):
     def get(self, _):

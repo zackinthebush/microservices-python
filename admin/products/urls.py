@@ -12,5 +12,8 @@ urlpatterns = [
         'put': 'update',
         'delete': 'destroy'
     })),
+    path('products/<str:pk>/like', ProductViewSet.as_view({
+        'post': 'like'
+    })),
     path('user', UserAPIView.as_view())
 ]
